@@ -76,6 +76,7 @@ function buttons() {
   });
 }
 
+
 function slider() {
   sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
   sliderSmooth.position((width / 2) - 210, (height / 5) * 4 + 50);
