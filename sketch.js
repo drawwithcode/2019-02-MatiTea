@@ -6,13 +6,17 @@ function setup() {
   frameRate(5);
   createCanvas(windowWidth, windowHeight);
 
-  buttons();
+  Buttons();
   slider();
 }
 
 function draw() {
   background(55, 55, 55);
   pixeledBackground();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
 function pixeledBackground() {
@@ -36,50 +40,35 @@ function pixeledBackground() {
   }
 }
 
-function buttons() {
-  let buttonPosY = (height / 5) * 4 - 20;
+function Buttons() {
 
-  let buttonRandom = createButton('RANDOM');
-  buttonRandom.position((width / 2) - 210, buttonPosY);
-  buttonRandom.style('width', '120px');
-  buttonRandom.style('height', '40px');
-  buttonRandom.style('font-size', '14px');
-  buttonRandom.style('font-weight', 'bold');
-  buttonRandom.style('background', 'white');
-  buttonRandom.style('border', '0');
-  buttonRandom.mousePressed(function() {
-    textureType = 0;
-  });
+  this.newButton = function (_xpos, _ypos, _name, _action) {
+    const button = createButton(_name);
+    button.position(_xpos, _ypos);
+    button.addClass("button");
+    button.mousePressed(_action);
+    return button;
+  }
 
-  let buttonNoise = createButton('NOISE');
-  buttonNoise.position((width / 2) - 60, buttonPosY);
-  buttonNoise.style('width', '120px');
-  buttonNoise.style('height', '40px');
-  buttonNoise.style('font-size', '14px');
-  buttonNoise.style('font-weight', 'bold');
-  buttonNoise.style('background', 'white');
-  buttonNoise.style('border', '0');
-  buttonNoise.mousePressed(function() {
-    textureType = 1;
-  });
+  this.initialize = function () {
+    let randomButton = this.newButton((width / 2) - 210, (height / 5) * 4 - 20, 'RANDOM', function () {
+      textureType = 0;
+    });
 
-  let buttonSave = createButton('SAVE');
-  buttonSave.position((width / 2) + 90, buttonPosY);
-  buttonSave.style('width', '120px');
-  buttonSave.style('height', '40px');
-  buttonSave.style('font-size', '14px');
-  buttonSave.style('font-weight', 'bold');
-  buttonSave.style('background', 'white');
-  buttonSave.style('border', '0');
-  buttonSave.mousePressed(function() {
-    save("texture.png");
-  });
+    let noiseButton = this.newButton((width / 2) - 60, (height / 5) * 4 - 20, 'NOISE', function () {
+      textureType = 1;
+    });
+
+    let saveButton = this.newButton((width / 2) + 90, (height / 5) * 4 - 20, 'SAVE', function () {
+      save("texture.png");
+    });
+  }
+
+  this.initialize();
 }
-
 
 function slider() {
   sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
   sliderSmooth.position((width / 2) - 210, (height / 5) * 4 + 50);
-  sliderSmooth.style('margin', '0');
-  sliderSmooth.style('width', '420px');
+  sliderSmooth.addClass('slider');
 }
