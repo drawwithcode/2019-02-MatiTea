@@ -51,24 +51,45 @@ function Buttons() {
   }
 
   this.initialize = function () {
-    let randomButton = this.newButton((width / 2) - 210, (height / 5) * 4 - 20, 'RANDOM', function () {
-      textureType = 0;
-    });
 
-    let noiseButton = this.newButton((width / 2) - 60, (height / 5) * 4 - 20, 'NOISE', function () {
-      textureType = 1;
-    });
+    if (windowWidth < 720) {
+      let randomButton = this.newButton((width / 2) - (width * 0.5), (height / 5) * 4 - 20, 'RANDOM', function () {
+        textureType = 0;
+      });
 
-    let saveButton = this.newButton((width / 2) + 90, (height / 5) * 4 - 20, 'SAVE', function () {
-      save("texture.png");
-    });
+      let noiseButton = this.newButton((width / 2) - (width * 0.15), (height / 5) * 4 - 20, 'NOISE', function () {
+        textureType = 1;
+      });
+
+      let saveButton = this.newButton((width / 2) + (width * 0.2), (height / 5) * 4 - 20, 'SAVE', function () {
+        save("texture.png");
+      });
+    } else {
+      let randomButton = this.newButton((width / 2) - 210, (height / 5) * 4 - 20, 'RANDOM', function () {
+        textureType = 0;
+      });
+
+      let noiseButton = this.newButton((width / 2) - 60, (height / 5) * 4 - 20, 'NOISE', function () {
+        textureType = 1;
+      });
+
+      let saveButton = this.newButton((width / 2) + 90, (height / 5) * 4 - 20, 'SAVE', function () {
+        save("texture.png");
+      });
+    }
   }
 
   this.initialize();
 }
 
 function slider() {
-  sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
-  sliderSmooth.position((width / 2) - 210, (height / 5) * 4 + 50);
-  sliderSmooth.addClass('slider');
+  if (windowWidth < 720) {
+    sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
+    sliderSmooth.position((width / 2) - (width / 5), (height / 5) * 4 + 50);
+    sliderSmooth.addClass('slider');
+  } else {
+    sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
+    sliderSmooth.position((width / 2) - 210, (height / 5) * 4 + 50);
+    sliderSmooth.addClass('slider');
+  }
 }
