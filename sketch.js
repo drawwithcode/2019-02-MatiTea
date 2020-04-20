@@ -83,13 +83,12 @@ function Buttons() {
 }
 
 function slider() {
+  sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
+  sliderSmooth.addClass('slider');
+
   if (windowWidth < 720) {
-    sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
     sliderSmooth.position((width / 2) - (width / 5), (height / 5) * 4 + 50);
-    sliderSmooth.addClass('slider');
   } else {
-    sliderSmooth = createSlider(40, 255, sliderSmoothDefaultValue);
     sliderSmooth.position((width / 2) - 210, (height / 5) * 4 + 50);
-    sliderSmooth.addClass('slider');
   }
 }
